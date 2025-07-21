@@ -5,6 +5,7 @@ window.onload = function () {
    }
   // initMapServices();
   initDestinationInput();
+  initVoiceToggle(); 
   monitorDestinationProximity(); 
   updateStatus("Idle");
   updateControls();
