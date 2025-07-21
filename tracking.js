@@ -53,8 +53,11 @@ startTracking() {
     showToast("🚀 Trip started!");
     updateStatus("Tracking");
     updateControls();
+    if (window.voiceGuidanceEnabled) {
+       speakText("Trip started. Navigation will begin when route is available.");
+    }; 
 
-    // === Start polling location every 10 seconds ===
+   // === Start polling location every 10 seconds ===
     trackingInterval = setInterval(() => {
       navigator.geolocation.getCurrentPosition(pos => {
         const newLatLng = {
