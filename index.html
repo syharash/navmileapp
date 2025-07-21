@@ -9,11 +9,17 @@
   <link rel="stylesheet" href="ui-fix.css" />
   <link rel="icon" href="./favicon.ico" type="image/x-icon" />
 
-  <!-- Google Maps API -->
+   
+  <!-- Core Maps Library -->
   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAInvy6GdRdnuYVJGlde1gX0VINpU5AsJI&libraries=places">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAInvy6GdRdnuYVJGlde1gX0VINpU5AsJI&libraries=maps">
   </script>
 
+  <!-- Place Autocomplete Element Module -->
+    <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAInvy6GdRdnuYVJGlde1gX0VINpU5AsJI&modules=place">
+  </script>
+  
   <!-- Google Identity -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
@@ -54,10 +60,11 @@
       <aside class="sidebar">
         <p id="userBadge"></p>
 
-    <div class="field-group">
-      <label for="destination-input">Destination:</label>
-      <input id="destination-input" placeholder="Start typing address…" />
-    </div>
+   <div class="field-group">
+        <label for="destination-autocomplete">Destination:</label>
+        <gmp-place-autocomplete id="destination-autocomplete" style="width: 100%;" placeholder="Start typing address…">
+        </gmp-place-autocomplete>  
+  </div>
 
     <div class="field-group">
       <label for="arrival-threshold">Arrival Sensitivity:</label>
