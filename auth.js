@@ -2,6 +2,7 @@ import { showToast, updateControls } from './ui.js';
 import { loadTripHistory, updateSummary } from './TripStore.js';
 import { resetTripLog } from './TripStore.js';
 resetTripLog();
+window.handleLogin = handleLogin;
 
 export function handleLogin(response) {
   const user = jwt_decode(response.credential);
