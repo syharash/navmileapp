@@ -1,8 +1,13 @@
+// 🌐 Global voice setting (default: on)
 window.voiceGuidanceEnabled = true;
 
+// 🎛️ Initialize voice guidance toggle button
 function initVoiceToggle() {
   const btn = document.getElementById("voice-toggle");
-  if (!btn) return;
+  if (!btn) {
+    console.warn("⚠️ Voice toggle button not found");
+    return;
+  }
 
   btn.onclick = () => {
     window.voiceGuidanceEnabled = !window.voiceGuidanceEnabled;
@@ -12,8 +17,13 @@ function initVoiceToggle() {
   };
 }
 
-// === Safe Text Update with Flash ===
-function safeUpdate(id, value) {
+// 👁️ Getter for voice guidance state (used by other modules)
+export function isVoiceEnabled() {
+  return window.voiceGuidanceEnabled;
+}
+
+// ✨ Flash text update utility
+export function safeUpdate(id, value) {
   const el = document.getElementById(id);
   if (!el) {
     console.warn(`⚠️ Element with ID "${id}" not found`);
@@ -24,8 +34,8 @@ function safeUpdate(id, value) {
   setTimeout(() => el.classList.remove("flash"), 800);
 }
 
-// === Update Dynamic Trip Status Label ===
-function updateTripStatusLabel(state) {
+// 🧭 Trip status banner updater (idle/tracking/paused/etc)
+export function updateTripStatusLabel(state) {
   const banner = document.getElementById("trip-status-label");
   if (!banner) return;
   const labels = {
@@ -37,44 +47,51 @@ function updateTripStatusLabel(state) {
   banner.textContent = labels[state] || "–";
 }
 
-function updateStatus(state) {
+// 📋 UI feedback state updater
+export function updateStatus(state) {
   const el = document.getElementById("tracking-status");
   if (el) el.textContent = state;
   document.body.classList.toggle("paused", state === "Paused");
   document.body.classList.toggle("ended", state === "Ended" || state === "Trip Complete");
 }
 
-function updateControls() {
+// 🎮 Enable/disable tracking controls based on tripStatus
+export function updateControls() {
   const startTrackingBtn = document.getElementById("startTrackingBtn");
   const pauseTrackingBtn = document.getElementById("pauseTrackingBtn");
   const resumeTrackingBtn = document.getElementById("resumeTrackingBtn");
   const endTrackingBtn = document.getElementById("endTrackingBtn");
 
-  if (window.tripStatus === 'idle') {
-    startTrackingBtn.disabled = false;
-    pauseTrackingBtn.disabled = true;
-    resumeTrackingBtn.disabled = true;
-    endTrackingBtn.disabled = true;
-  } else if (window.tripStatus === 'tracking') {
-    startTrackingBtn.disabled = true;
-    pauseTrackingBtn.disabled = false;
-    resumeTrackingBtn.disabled = true;
-    endTrackingBtn.disabled = false;
-  } else if (window.tripStatus === 'paused') {
-    startTrackingBtn.disabled = true;
-    pauseTrackingBtn.disabled = true;
-    resumeTrackingBtn.disabled = false;
-    endTrackingBtn.disabled = true;
-  } else if (window.tripStatus === 'resumed') {
-    startTrackingBtn.disabled = true;
-    pauseTrackingBtn.disabled = false;
-    resumeTrackingBtn.disabled = true;
-    endTrackingBtn.disabled = false;
+  switch (window.tripStatus) {
+    case 'idle':
+      startTrackingBtn.disabled = false;
+      pauseTrackingBtn.disabled = true;
+      resumeTrackingBtn.disabled = true;
+      endTrackingBtn.disabled = true;
+      break;
+    case 'tracking':
+      startTrackingBtn.disabled = true;
+      pauseTrackingBtn.disabled = false;
+      resumeTrackingBtn.disabled = true;
+      endTrackingBtn.disabled = false;
+      break;
+    case 'paused':
+      startTrackingBtn.disabled = true;
+      pauseTrackingBtn.disabled = true;
+      resumeTrackingBtn.disabled = false;
+      endTrackingBtn.disabled = true;
+      break;
+    case 'resumed':
+      startTrackingBtn.disabled = true;
+      pauseTrackingBtn.disabled = false;
+      resumeTrackingBtn.disabled = true;
+      endTrackingBtn.disabled = false;
+      break;
   }
 }
 
-// === Show Toast with Style & Timeout ===
-function showToast(message, type = "info", duration = 3000) {
+// 🍞 Show toast with style and auto-remove
+export function showToast(message, type = "info", duration = 3000) {
   const toast = document.createElement("div");
   toast.className = `toast toast-${type}`;
   toast.textContent = message;
@@ -82,13 +99,18 @@ function showToast(message, type = "info", duration = 3000) {
   setTimeout(() => toast.remove(), duration);
 }
 
-function toggleHelp() {
+// ❓ Toggle help screen visibility
+export function toggleHelp() {
   const h = document.getElementById("help-screen");
+  if (!h) {
+    console.warn("⚠️ Help screen element not found");
+    return;
+  }
   h.style.display = h.style.display === "none" ? "block" : "none";
 }
 
-// === Toggle Directions Panel Visibility ===
-function initDirectionsPanelToggle() {
+// 🧭 Toggle directions panel open/collapsed
+export function initDirectionsPanelToggle() {
   const toggleBtn = document.getElementById("toggleRouteBtn");
   const panel = document.getElementById("directions-panel");
 
@@ -97,21 +119,14 @@ function initDirectionsPanelToggle() {
     return;
   }
 
-window.voiceGuidanceEnabled = true;
-
-function initVoiceToggle() {
-  const btn = document.getElementById("voice-toggle");
-  if (!btn) return;
-
-  btn.onclick = () => {
-    window.voiceGuidanceEnabled = !window.voiceGuidanceEnabled;
-    btn.classList.toggle("active", window.voiceGuidanceEnabled);
-    btn.textContent = window.voiceGuidanceEnabled ? "🔊 Voice On" : "🔇 Voice Off";
-    showToast(`Voice ${window.voiceGuidanceEnabled ? "enabled" : "disabled"}`, "info");
-  };
-}
   toggleBtn.addEventListener("click", () => {
     panel.classList.toggle("collapsed");
     panel.classList.toggle("expanded");
   });
+}
+
+// 📦 Module initializer (optional use in main.js)
+export function initUI() {
+  initVoiceToggle();
+  initDirectionsPanelToggle();
 }
