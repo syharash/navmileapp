@@ -79,7 +79,11 @@ startTracking() {
     },
     () => showToast("⚠️ Unable to access GPS during tracking", "error")
   );
-}, 10000),
+}, 10000);
+}); // closes getCurrentPosition
+} // closes setTimeout
+}, // ends startTracking function inside MileApp
+   
 pauseTracking() {
   MileApp.updateStatusBar("Paused");
   window.tripStatus = 'paused';
