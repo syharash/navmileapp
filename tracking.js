@@ -12,6 +12,8 @@ window.MileApp = {
   document.getElementById("status-text").textContent = status;
 },
 startTracking() {
+  // 🟢 Show map panel before initializing
+  document.querySelector(".map-panel").style.display = "flex"; // or "block" if applicable
   MileApp.updateStatusBar("Tracking");
   tripStartTime = Date.now();
   document.getElementById("trip-timer").style.display = "block";
@@ -21,8 +23,13 @@ startTracking() {
   trackingPath = []; // reset live path
 
   // === Initialize map and polyline ===
-  initMapServices();
-  trackingPolyline = new google.maps.Polyline({
+  // 🕒 Delay init to let layout settle
+  setTimeout(() => {
+    if (!map) {
+      initMapServices();
+      google.maps.event.trigger(map, 'resize');
+    }
+    trackingPolyline = new google.maps.Polyline({
     path: trackingPath,
     geodesic: true,
     strokeColor: "#00BFFF",
