@@ -29,6 +29,7 @@ function initVehicleTracking(map, directions) {
 }
 
 function speakUpcomingInstruction(current, steps) {
+  if (!window.voiceGuidanceEnabled) return;
   steps.forEach((step, index) => {
     const startLoc = step.start_location;
     const dist = google.maps.geometry.spherical.computeDistanceBetween(current, startLoc);
@@ -59,6 +60,12 @@ function speakArrival(destinationName) {
   speakText(`You've arrived at ${destinationName}. Trip ended.`);
 }
 
+function resetNavigation() {
+  if (vehicleMarker) vehicleMarker.setMap(null);
+  spokenSteps.clear();
+  window.speechSynthesis.cancel();
+  updateNavBanner(""); // Clear banner
+}
 function stripHTML(html) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
