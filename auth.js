@@ -1,6 +1,6 @@
 import { showToast, updateControls } from './ui.js';
-import { loadTripHistory, updateSummary } from './TripStorage.js';
-import { resetTripLog } from './TripStorage.js';
+import { loadTripHistory, updateSummary } from './TripStore.js';
+import { resetTripLog } from './TripStore.js';
 resetTripLog();
 
 export function handleLogin(response) {
