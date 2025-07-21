@@ -5,21 +5,19 @@ let destinationName = "";
 
 // Initialize Places Autocomplete input
 function initDestinationInput() {
-  const input = document.getElementById("destination-input");
-  if (!input) return;
+  const autocompleteEl = document.getElementById("destination-autocomplete");
+  if (!autocompleteEl) {
+    console.warn("⚠️ Destination autocomplete element not found.");
+    return;
+  }
 
-  const autocomplete = new google.maps.places.Autocomplete(input, {
-    fields: ["geometry", "name"]
-  });
-
-  autocomplete.addListener("place_changed", () => {
-    const place = autocomplete.getPlace();
-    selectedDestination = place.geometry.location;
-    destinationName = place.name || "Destination";
+  autocompleteEl.addEventListener("gmp-placechange", (event) => {
+    const place = event.detail;
+    selectedDestination = place.location;
+    destinationName = place.displayName || "Destination";
 
     showToast(`📍 Destination set: ${destinationName}`, "success");
-
-    startDestinationWatcher(); // Start monitoring only after destination is set
+    startDestinationWatcher();
   });
 }
 
