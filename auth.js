@@ -1,5 +1,7 @@
 import { showToast, updateControls } from './ui.js';
 import { loadTripHistory, updateSummary } from './TripStorage.js';
+import { resetTripLog } from './TripStorage.js';
+resetTripLog();
 
 export function handleLogin(response) {
   const user = jwt_decode(response.credential);
