@@ -1,6 +1,7 @@
 // === destination.js ===
 let selectedDestination = null;
 let destinationName = "";
+import { initMapServices, getMapInstance } from './map.js';
 
 // Initialize Places Autocomplete input
 function initDestinationInput() {
@@ -24,7 +25,11 @@ import { initMapServices } from './map.js';
 
 function handleDestination(lat, lng) {
   initMapServices(); // Ensure map is ready
-
+  const map = getMapInstance(); // Safely retrieve shared map instance
+  if (!map) {
+    console.warn("❌ Map not initialized — cannot place destination marker.");
+    return;
+  }
   const destination = new google.maps.LatLng(lat, lng);
   const marker = new google.maps.Marker({
     position: destination,
