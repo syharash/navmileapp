@@ -1,4 +1,5 @@
 let map, directionsService, directionsRenderer;
+let mapInitialized = false;
 
 function initMapServices() {
   const mapEl = document.getElementById("map");
@@ -6,7 +7,9 @@ function initMapServices() {
     console.warn("🛑 Map element not visible or sized properly.");
     return;
   }
-
+  if (mapInitialized || map) return; // Avoid multiple inits
+  mapInitialized = true;
+  
   if (map) return;
   const sacramento = { lat: 38.5816, lng: -121.4944 };
   map = new google.maps.Map(document.getElementById("map"), {
