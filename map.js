@@ -104,3 +104,8 @@ export function getMapInstance() {
   return map;
 }
 
+export function directionsRenderer() {
+  return map;
+}
+
+
