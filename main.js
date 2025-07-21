@@ -1,22 +1,39 @@
+import {
+  initVoiceToggle,
+  initDirectionsPanelToggle,
+  updateStatus,
+  updateControls,
+  showToast
+} from './ui.js';
+
+import { initDestinationInput, monitorDestinationProximity } from './destination.js';
+import { loadTripHistory, downloadCSV, clearHistory, logoutUser } from './storage.js';
+import { directionsRenderer } from './map.js'; // Assuming exported from map.js
+
 window.onload = function () {
-   if (!window.MileApp) {
+  if (!window.MileApp) {
     console.error("🚫 MileApp not available — tracking functions can't be bound yet.");
     return;
-   }
-  // initMapServices();
+  }
+
+  // 🌐 Core setup
   initDestinationInput();
-  initVoiceToggle(); 
-  monitorDestinationProximity(); 
+  initVoiceToggle();
+  initDirectionsPanelToggle();
+  monitorDestinationProximity();
   updateStatus("Idle");
   updateControls();
   loadTripHistory();
 
+  // ⚙️ Register service worker
   if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("✅ Service Worker registered"))
-    .catch(err => console.error("❌ Service Worker error:", err));
-}
-    const buttonHandlers = {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("✅ Service Worker registered"))
+      .catch(err => console.error("❌ Service Worker error:", err));
+  }
+
+  // 🔘 Bind button handlers
+  const buttonHandlers = {
     startTrackingBtn: MileApp.startTracking,
     pauseTrackingBtn: MileApp.pauseTracking,
     resumeTrackingBtn: MileApp.resumeTracking,
@@ -34,20 +51,27 @@ window.onload = function () {
     else console.warn(`🔍 Missing button with ID: ${id}`);
   }
 
-  document.getElementById("trip-purpose").value = "";
-  document.getElementById("trip-notes").value = "";
+  // 📝 Clear trip form inputs
+  const purposeInput = document.getElementById("trip-purpose");
+  if (purposeInput) purposeInput.value = "";
 
+  const notesInput = document.getElementById("trip-notes");
+  if (notesInput) notesInput.value = "";
+
+  // 🍞 Confirm toast container exists
   if (!document.getElementById("toast")) {
     console.warn("🚨 Toast element not found.");
   }
 
-  if (directionsRenderer) {
+  // 🧹 Clear any residual directions on load
+  if (typeof directionsRenderer !== "undefined" && directionsRenderer) {
     directionsRenderer.setDirections({ routes: [] });
     const panel = document.getElementById("directions-panel");
     if (panel) panel.innerHTML = "";
   }
 };
 
+// 📋 Handle menu popup commands
 function handleMenuAction(action) {
   switch (action) {
     case "start": MileApp.startTracking(); break;
@@ -55,29 +79,8 @@ function handleMenuAction(action) {
     case "resume": MileApp.resumeTracking(); break;
     case "end": MileApp.endTracking(); break;
     case "download": downloadCSV(false); break;
-    default: console.warn(`⚠️ Unknown menu action: ${action}`);
+    default:
+      console.warn(`⚠️ Unknown menu action: ${action}`);
+      showToast(`Unknown menu action: ${action}`, "error");
   }
-}
-
-// === Toggle Directions Panel Visibility ===
-function initDirectionsPanelToggle() {
-  const toggleBtn = document.getElementById("toggleRouteBtn");
-  const panel = document.getElementById("directions-panel");
-
-  if (!toggleBtn || !panel) {
-    console.warn("⚠️ Directions toggle elements not found");
-    return;
-  }
-
-  // Start collapsed by default
-  panel.classList.add("collapsed");
-
-  toggleBtn.addEventListener("click", () => {
-    const isCollapsed = panel.classList.contains("collapsed");
-    panel.classList.toggle("collapsed", !isCollapsed);
-    panel.classList.toggle("expanded", isCollapsed);
-
-    // Optional: change button label on toggle
-    toggleBtn.textContent = isCollapsed ? "📍 Hide Route Details" : "📍 Show Route Details";
-  });
 }
