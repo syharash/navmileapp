@@ -76,6 +76,20 @@
   background-color: #00BFFF;
 }
 
+#destination-confirm-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 15px;
+  margin: 12px auto;
+  display: block;
+  max-width: 300px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
 #directions-panel.collapsed {
   max-height: 0;
   overflow: hidden;
