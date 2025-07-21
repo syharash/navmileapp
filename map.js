@@ -1,7 +1,7 @@
 let map, directionsService, directionsRenderer;
 let mapInitialized = false;
 
-function initMapServices() {
+export function initMapServices() {
   const mapEl = document.getElementById("map");
   if (!mapEl || mapEl.offsetHeight === 0) {
     console.warn("🛑 Map element not visible or sized properly.");
@@ -101,10 +101,6 @@ function stripHTML(html) {
 }
 
 export function getMapInstance() {
-  return map;
-}
-
-export function initMapServices() {
   return map;
 }
 
