@@ -7,7 +7,7 @@ import {
 } from './ui.js';
 
 import { initDestinationInput, monitorDestinationProximity } from './destination.js';
-import { loadTripHistory, downloadCSV, clearHistory, logoutUser } from './storage.js';
+import { loadTripHistory, downloadCSV, clearHistory } from './TripStore.js';
 import { directionsRenderer } from './map.js'; // Assuming exported from map.js
 
 window.onload = function () {
