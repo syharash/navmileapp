@@ -60,6 +60,22 @@
   margin-bottom: 8px;
 }
 
+/* === Voice Navigation Toggle === */
+#voice-toggle {
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  border: none;
+  width: 100%;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+#voice-toggle.active {
+  background-color: #00BFFF;
+}
+
 #directions-panel.collapsed {
   max-height: 0;
   overflow: hidden;
