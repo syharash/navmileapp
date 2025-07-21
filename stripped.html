@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Google Maps Test</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  </script>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const center = { lat: 38.580, lng: -121.490 }; // Sacramento
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: center,
+      });
+
+      new google.maps.Marker({
+        position: center,
+        map: map,
+        title: "Test Location",
+      });
+    }
+
+    window.onload = function() {
+      if (typeof google !== "undefined" && google.maps) {
+        initMap();
+      } else {
+        alert("Google Maps API failed to load.");
+      }
+    };
+  </script>
+</body>
+</html>
