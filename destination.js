@@ -21,7 +21,7 @@ function initDestinationInput() {
   });
 }
 
-import { initMapServices } from './map.js';
+// import { initMapServices } from './map.js';
 
 function handleDestination(lat, lng) {
   initMapServices(); // Ensure map is ready
