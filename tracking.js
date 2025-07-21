@@ -13,74 +13,77 @@ window.MileApp = {
 },
 startTracking() {
   // 🟢 Show map panel before initializing
-  document.querySelector(".map-panel").style.display = "flex"; // or "block" if applicable
+  document.querySelector(".map-panel").style.display = "flex";
   MileApp.updateStatusBar("Tracking");
   tripStartTime = Date.now();
   document.getElementById("trip-timer").style.display = "block";
   MileApp.updateTripTimer();
   window.tripStatus = 'tracking';
   totalPauseDuration = 0;
-  trackingPath = []; // reset live path
+  trackingPath = [];
 
-  // === Initialize map and polyline ===
   // 🕒 Delay init to let layout settle
   setTimeout(() => {
     if (!map) {
       initMapServices();
       google.maps.event.trigger(map, 'resize');
     }
+
     trackingPolyline = new google.maps.Polyline({
-    path: trackingPath,
-    geodesic: true,
-    strokeColor: "#00BFFF",
-    strokeOpacity: 1.0,
-    strokeWeight: 4,
-    map: map
-  });
+      path: trackingPath,
+      geodesic: true,
+      strokeColor: "#00BFFF",
+      strokeOpacity: 1.0,
+      strokeWeight: 4,
+      map: map
+    });
 
-  // === Capture initial location ===
-  navigator.geolocation.getCurrentPosition(pos => {
-    const latLng = {
-      lat: pos.coords.latitude,
-      lng: pos.coords.longitude
-    };
-
-    tripStart = {
-      latitude: latLng.lat,
-      longitude: latLng.lng,
-      timestamp: Date.now()
-    };
-
-    trackingPath.push(latLng);
-    trackingPolyline.setPath(trackingPath);
-    map.setCenter(latLng);
-    google.maps.event.trigger(map, 'resize');
-    tracking = true;
-
-    showToast("🚀 Trip started!");
-    updateStatus("Tracking");
-    updateControls();
-    if (window.voiceGuidanceEnabled) {
-       speakText("Trip started. Navigation will begin when route is available.");
-    }; 
-
-   // === Start polling location every 10 seconds ===
-    trackingInterval = setInterval(() => {
-      navigator.geolocation.getCurrentPosition(    pos => {
-       const newLatLng = {
+    // === Capture initial location ===
+    navigator.geolocation.getCurrentPosition(pos => {
+      const latLng = {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude
       };
 
-      trackingPath.push(newLatLng);
+      tripStart = {
+        latitude: latLng.lat,
+        longitude: latLng.lng,
+        timestamp: Date.now()
+      };
+
+      trackingPath.push(latLng);
       trackingPolyline.setPath(trackingPath);
-      map.setCenter(newLatLng);
-    },
-    () => showToast("⚠️ Unable to access GPS during tracking", "error"));
-  }, 10000);
-}); // closes getCurrentPosition
-} // closes setTimeout
-}, // ends startTracking function inside MileApp
+      map.setCenter(latLng);
+      google.maps.event.trigger(map, 'resize');
+      tracking = true;
+
+      showToast("🚀 Trip started!");
+      updateStatus("Tracking");
+      updateControls();
+
+      if (window.voiceGuidanceEnabled) {
+        speakText("Trip started. Navigation will begin when route is available.");
+      }
+
+      // === Start polling location every 10 seconds ===
+      trackingInterval = setInterval(() => {
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            const newLatLng = {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude
+            };
+
+            trackingPath.push(newLatLng);
+            trackingPolyline.setPath(trackingPath);
+            map.setCenter(newLatLng);
+          },
+          () => showToast("⚠️ Unable to access GPS during tracking", "error")
+        );
+      }, 10000);
+    }, () => showToast("⚠️ Unable to access GPS", "error"));
+  }, 100); // ← optional delay to let layout settle
+}, // closes startTracking method inside MileApp
    
 pauseTracking() {
   MileApp.updateStatusBar("Paused");
