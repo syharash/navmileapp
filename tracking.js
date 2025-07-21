@@ -76,6 +76,7 @@ pauseTracking() {
   trackingInterval = null;
   pauseStartTime = Date.now();
   updateStatus("Paused");
+     if (window.tripStatus === "paused" || !window.voiceGuidanceEnabled) return; 
   showToast("⏸️ Trip paused");
   updateControls();
 },
@@ -91,6 +92,7 @@ resumeTracking() {
   }
   updateStatus("Tracking");
   showToast("▶️ Trip resumed");
+         if (window.tripStatus === "tracking" || window.voiceGuidanceEnabled) return;
   updateControls();
 },
 endTracking: async function () {
@@ -118,7 +120,9 @@ endTracking: async function () {
       if (result) {
         const leg = result.routes[0].legs[0];
         directionsRenderer.setDirections(result);
+        initVehicleTracking(map, result);
         localStorage.setItem("lastRoute", JSON.stringify(result));
+         if (window.tripStatus === "ended" || !window.voiceGuidanceEnabled) return;
 
         const distanceMi = (leg.distance.value / 1609.34).toFixed(2);
         const durationMin = Math.round(leg.duration.value / 60);
@@ -191,6 +195,7 @@ restoreLastTrip() {
   const leg = result.routes[0].legs[0];
 
   directionsRenderer.setDirections(result);
+  initVehicleTracking(map, result);
 
   safeUpdate("summary-start", leg.start_address);
   safeUpdate("summary-end", leg.end_address);
