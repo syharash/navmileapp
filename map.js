@@ -1,4 +1,4 @@
-let map, directionsService, directionsRenderer;
+polet map, directionsService, directionsRenderer;
 let mapInitialized = false;
 
 function initMapServices() {
@@ -101,6 +101,10 @@ function stripHTML(html) {
 }
 
 export function getMapInstance() {
+  return map;
+}
+
+export function initMapServices() {
   return map;
 }
 
