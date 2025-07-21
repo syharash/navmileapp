@@ -83,6 +83,19 @@ function initDirectionsPanelToggle() {
     return;
   }
 
+window.voiceGuidanceEnabled = true;
+
+function initVoiceToggle() {
+  const btn = document.getElementById("voice-toggle");
+  if (!btn) return;
+
+  btn.onclick = () => {
+    window.voiceGuidanceEnabled = !window.voiceGuidanceEnabled;
+    btn.classList.toggle("active", window.voiceGuidanceEnabled);
+    btn.textContent = window.voiceGuidanceEnabled ? "🔊 Voice On" : "🔇 Voice Off";
+    showToast(`Voice ${window.voiceGuidanceEnabled ? "enabled" : "disabled"}`, "info");
+  };
+}
   toggleBtn.addEventListener("click", () => {
     panel.classList.toggle("collapsed");
     panel.classList.toggle("expanded");
