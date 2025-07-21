@@ -86,7 +86,7 @@ startTracking() {
           () => showToast("⚠️ Unable to access GPS during tracking", "error")
         );
       }, 10000);
-    }, () => );
+    }, () => }, () => showToast("⚠️ Unable to access GPS", "error"));
   }, 100); // ← optional delay to let layout settle
 }, // closes startTracking method inside MileApp
    
