@@ -2,7 +2,7 @@
   "name": "Miles Recompense",
   "short_name": "MileApp",
   "description": "Track mileage, log trips, calculate reimbursements, and export your driving data.",
-  "start_url": "https://syharash.github.io/navmileapp/",
+  "start_url": "https://syharash.github.io/navmileapp/index.html",
   "scope": "https://syharash.github.io/navileapp/",
   "display": "standalone",
   "orientation": "portrait",
