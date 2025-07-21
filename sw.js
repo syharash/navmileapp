@@ -1,4 +1,4 @@
-const CACHE_NAME = "MileApp-v2"; // ✅ Bump version to force refresh
+const CACHE_NAME = "NavMileApp-v2"; // ✅ Bump version to force refresh
 const urlsToCache = [
   "./index.html",
   "./style.css",
