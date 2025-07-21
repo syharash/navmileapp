@@ -29,8 +29,7 @@ function startDestinationWatcher() {
   console.warn("Destination removed during trip");
   return;
 }
-  }
-
+  
   navigator.geolocation.watchPosition(
     pos => {
       const currentLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
