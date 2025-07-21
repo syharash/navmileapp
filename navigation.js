@@ -37,9 +37,15 @@ function speakUpcomingInstruction(current, steps) {
       spokenSteps.add(index);
 
       const instruction = stripHTML(step.instructions || "Continue");
+      updateNavBanner(instruction);  // 👈 Visual cue
       speakText(`Next: ${instruction}`);
     }
   });
+}
+
+function updateNavBanner(instruction) {
+  const el = document.getElementById("nav-banner");
+  if (el) el.textContent = `Next: ${instruction}`;
 }
 
 function speakText(text) {
