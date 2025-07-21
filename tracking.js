@@ -50,7 +50,12 @@ startTracking() {
         longitude: latLng.lng,
         timestamp: Date.now()
       };
-
+     
+      if (!map) {
+                  console.warn("🛑 Map is undefined. Initializing now...");
+                  initMapServices(); // You may also want to delay this until #map is fully visible
+                };  
+     
       trackingPath.push(latLng);
       trackingPolyline.setPath(trackingPath);
       map.setCenter(latLng);
