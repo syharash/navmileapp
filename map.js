@@ -1,4 +1,4 @@
-polet map, directionsService, directionsRenderer;
+let map, directionsService, directionsRenderer;
 let mapInitialized = false;
 
 function initMapServices() {
