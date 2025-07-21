@@ -1,2 +1,2 @@
-# navmileapp
-This app will provide a Google Maps like feature with live voice guided navigation and then historical trip data with total reimbursement value
+mileage-tracker
+to track mileage automatically and calculate the expenses with a custom per mile amount

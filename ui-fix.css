@@ -1,0 +1,73 @@
+/* === Mobile-Specific UI Fixes === */
+@media (max-width: 1200px) {
+  body {
+    font-size: 16px;
+  }
+
+  .split-layout {
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  .map-panel {
+    width: 100%;
+    padding: 0;
+    order: 1;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 16px;
+    order: 2;
+    overflow-y: auto;
+  }
+
+  #map {
+    width: 100%;
+    height: calc(100% - 250px); /* Adjust for header, controls, etc. */
+    max-height: 400px;
+    background-color: #eef;
+  }
+
+  button,
+  input,
+  textarea {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  #trip-timer,
+  #status-bar {
+    font-size: 16px;
+    padding: 8px;
+    text-align: center;
+  }
+}
+
+/* === Directions Panel Toggle === */
+#route-wrapper {
+  padding: 16px;
+}
+
+#toggleRouteBtn {
+  background-color: #00BFFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+#directions-panel.collapsed {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+#directions-panel.expanded {
+  max-height: 500px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+}
