@@ -4,6 +4,8 @@ window.onload = function () {
     return;
    }
   // initMapServices();
+  initDestinationInput();
+  monitorDestinationProximity(); 
   updateStatus("Idle");
   updateControls();
   loadTripHistory();
