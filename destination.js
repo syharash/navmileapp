@@ -1,5 +1,4 @@
 // === destination.js ===
-
 let selectedDestination = null;
 let destinationName = "";
 
@@ -19,6 +18,22 @@ function initDestinationInput() {
     showToast(`📍 Destination set: ${destinationName}`, "success");
     startDestinationWatcher();
   });
+}
+
+import { initMapServices } from './map.js';
+
+function handleDestination(lat, lng) {
+  initMapServices(); // Ensure map is ready
+
+  const destination = new google.maps.LatLng(lat, lng);
+  const marker = new google.maps.Marker({
+    position: destination,
+    map: map,
+    title: 'Destination',
+    icon: 'your-icon.png'
+  });
+
+  map.panTo(destination);
 }
 
 // Start monitoring proximity once destination is known
