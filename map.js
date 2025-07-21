@@ -99,3 +99,8 @@ function stripHTML(html) {
   temp.innerHTML = html;
   return temp.textContent || temp.innerText || "";
 }
+
+export function getMapInstance() {
+  return map;
+}
+
