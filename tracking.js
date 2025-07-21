@@ -1,4 +1,5 @@
 import { initMapServices, getMapInstance } from './map.js';
+import { logTrip } from './TripStore.js';
 
 let trackingPath = [];
 let tracking = false;
