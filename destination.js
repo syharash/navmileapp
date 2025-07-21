@@ -55,6 +55,24 @@ function getArrivalThreshold() {
   return sel ? parseInt(sel.value, 10) || 100 : 100;
 }
 
+
+function monitorDestinationProximity() {
+  if (!selectedDestination || window.tripStatus !== "tracking") return;
+
+  navigator.geolocation.watchPosition(
+    pos => {
+      const currentLoc = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+      const distance = google.maps.geometry.spherical.computeDistanceBetween(currentLoc, selectedDestination);
+
+      if (distance < 100) {
+        confirmTripEnd(distance);
+      }
+    },
+    err => console.warn("📡 Location error while checking destination:", err),
+    { enableHighAccuracy: true, maximumAge: 5000 }
+  );
+}
+
 // Prompt user to confirm trip end when near destination
 function confirmTripEnd(distance) {
   if (document.getElementById("destination-confirm-btn")) return; // Prevent duplicates
