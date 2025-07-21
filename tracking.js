@@ -66,19 +66,20 @@ startTracking() {
 
    // === Start polling location every 10 seconds ===
     trackingInterval = setInterval(() => {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const newLatLng = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        };
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const newLatLng = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
 
-        trackingPath.push(newLatLng);
-        trackingPolyline.setPath(trackingPath);
-        map.setCenter(newLatLng);
-      }, () => console.warn("⚠️ Unable to access GPS during tracking"));
-    }, 10000);
-  }, () => showToast("⚠️ Unable to access GPS", "error"));
-},
+      trackingPath.push(newLatLng);
+      trackingPolyline.setPath(trackingPath);
+      map.setCenter(newLatLng);
+    },
+    () => showToast("⚠️ Unable to access GPS during tracking", "error")
+  );
+}, 10000);
 pauseTracking() {
   MileApp.updateStatusBar("Paused");
   window.tripStatus = 'paused';
