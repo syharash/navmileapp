@@ -25,9 +25,10 @@ function initDestinationInput() {
 
 // Start monitoring proximity once destination is known
 function startDestinationWatcher() {
-  if (!selectedDestination) {
-    console.warn("🚫 Destination not set");
-    return;
+ if (!selectedDestination) {
+  console.warn("Destination removed during trip");
+  return;
+}
   }
 
   navigator.geolocation.watchPosition(
@@ -65,6 +66,9 @@ function confirmTripEnd(distance) {
   btn.id = "destination-confirm-btn";
   btn.textContent = "✅ End Trip Now";
   btn.className = "toast toast-success";
+  if (window.voiceGuidanceEnabled && typeof speakArrival === "function") {
+  speakArrival(destinationName);
+      };
   btn.onclick = () => {
     clearDestinationPrompt();
     MileApp.endTracking();
