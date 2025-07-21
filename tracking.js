@@ -66,8 +66,8 @@ startTracking() {
 
    // === Start polling location every 10 seconds ===
     trackingInterval = setInterval(() => {
-  navigator.geolocation.getCurrentPosition(    pos => {
-      const newLatLng = {
+      navigator.geolocation.getCurrentPosition(    pos => {
+       const newLatLng = {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude
       };
@@ -76,7 +76,7 @@ startTracking() {
       trackingPolyline.setPath(trackingPath);
       map.setCenter(newLatLng);
     },
-    () => showToast("⚠️ Unable to access GPS during tracking", "error")
+    () => showToast("⚠️ Unable to access GPS during tracking", "error"));
   }, 10000);
 }); // closes getCurrentPosition
 } // closes setTimeout
