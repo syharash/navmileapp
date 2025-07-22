@@ -1,8 +1,7 @@
 /* === Mobile-Specific UI Fixes === */
 @media (max-width: 1200px) {
-  #map {
-    height: calc(100% - 250px); /* Adjust for header, controls, etc. */
-    max-height: 400px;
+  body {
+    font-size: 16x;
   }
 }
 
@@ -13,6 +12,8 @@
   }
 
   .map-panel {
+    min-height: 300px;
+    height: auto;
     width: 100%;
     padding: 0;
     order: 1;
