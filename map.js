@@ -46,7 +46,7 @@ export function initMapServices() {
   console.log("🗺️ Map initialized");
 }
 
-function getRoute(start, end) {
+export function getRoute(start, end) {
   return new Promise((resolve, reject) => {
     directionsService.route({
       origin: new google.maps.LatLng(start.latitude, start.longitude),
@@ -104,4 +104,5 @@ export function getMapInstance() {
 }
 
 export { directionsRenderer };
+export { directionsService };
 
