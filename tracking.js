@@ -1,6 +1,7 @@
 import { showToast, updateStatus, updateControls } from './ui.js';
 import { initMapServices, getMapInstance } from './map.js';
 import { logTrip } from './TripStore.js';
+import { speakText } from './navigation.js';
 
 let trackingPath = [];
 let tracking = false;
