@@ -1,5 +1,5 @@
 import { showToast, safeUpdate, updateStatus, updateControls } from './ui.js';
-import { initMapServices, getMapInstance, directionsRenderer, directionsService, getRoute } from './map.js';
+import { initMapServices, getMapInstance, directionsRenderer, directionsService, getRoute, renderSteps } from './map.js';
 import { logTrip } from './TripStore.js';
 import { speakText, initVehicleTracking} from './navigation.js';
 
