@@ -1,7 +1,6 @@
-let map, directionsService;
+let map, directionsService, directionsRenderer;
 let mapInitialized = false;
-export const directionsRenderer = new google.maps.DirectionsRenderer();
-
+ 
 export function initMapServices() {
   const mapEl = document.getElementById("map");
   if (!mapEl || mapEl.offsetHeight === 0) {
