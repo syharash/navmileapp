@@ -1,3 +1,7 @@
+document.querySelector(".map-panel").style.display = "flex";
+document.querySelector(".map-panel").style.minHeight = "300px";
+document.getElementById("map").style.minHeight = "300px";
+
 /* === Core Resets === */
 * {
   box-sizing: border-box;
