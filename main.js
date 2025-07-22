@@ -34,17 +34,17 @@ window.onload = function () {
   }
 
   // 🔘 Bind button handlers
-  const buttonHandlers = {
-    startTrackingBtn: MileApp.startTracking,
-    pauseTrackingBtn: MileApp.pauseTracking,
-    resumeTrackingBtn: MileApp.resumeTracking,
-    endTrackingBtn: MileApp.endTracking,
-    downloadCSVBtn: downloadCSV,
-    clearHistoryBtn: clearHistory,
-    toggleHelpBtn: MileApp.toggleHelp,
-    restoreTrip: MileApp.restoreLastTrip,
-    logoutBtn: logoutUser
-  };
+ const buttonHandlers = {
+  startTrackingBtn: () => MileApp.startTracking(),
+  pauseTrackingBtn: () => MileApp.pauseTracking(),
+  resumeTrackingBtn: () => MileApp.resumeTracking(),
+  endTrackingBtn: () => MileApp.endTracking(),
+  downloadCSVBtn: () => downloadCSV(),
+  clearHistoryBtn: () => clearHistory(),
+  toggleHelpBtn: () => MileApp.toggleHelp(),
+  restoreTrip: () => MileApp.restoreLastTrip(),
+  logoutBtn: () => logoutUser()
+};
 
   for (const [id, handler] of Object.entries(buttonHandlers)) {
   const el = document.getElementById(id);
