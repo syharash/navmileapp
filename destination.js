@@ -4,7 +4,7 @@ let destinationName = "";
 import { initMapServices, getMapInstance } from './map.js';
 
 // Initialize Places Autocomplete input
-function initDestinationInput() {
+export function initDestinationInput() {
   const autocompleteEl = document.getElementById("destination-autocomplete");
   if (!autocompleteEl) {
     console.warn("⚠️ Destination autocomplete element not found.");
