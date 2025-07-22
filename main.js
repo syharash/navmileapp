@@ -48,7 +48,7 @@ window.onload = function () {
 
   for (const [id, handler] of Object.entries(buttonHandlers)) {
   const el = document.getElementById(id);
-  if (el) el.onclick = () => handler(); // preserves `this` context
+  if (el) el.onclick = handler; // preserves `this` context
   else console.warn(`🔍 Missing button with ID: ${id}`);
 }
 
