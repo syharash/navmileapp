@@ -38,7 +38,7 @@ export function initMapServices() {
 
   directionsService = new google.maps.DirectionsService();
 
-  export directionsRenderer = new google.maps.DirectionsRenderer({
+   directionsRenderer = new google.maps.DirectionsRenderer({
     map: map,
     panel: document.getElementById("directions-panel"),
     suppressMarkers: true
