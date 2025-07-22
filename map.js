@@ -1,4 +1,5 @@
-let map, directionsService, directionsRenderer;
+let map, directionsService;
+export const directionsRenderer = new google.maps.DirectionsRenderer();
 let mapInitialized = false;
 
 export function initMapServices() {
