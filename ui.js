@@ -2,7 +2,7 @@
 window.voiceGuidanceEnabled = true;
 
 // 🎛️ Initialize voice guidance toggle button
-function initVoiceToggle() {
+export function initVoiceToggle() {
   const btn = document.getElementById("voice-toggle");
   if (!btn) {
     console.warn("⚠️ Voice toggle button not found");
