@@ -1,4 +1,4 @@
-poimport { getMapInstance } from './map.js';
+import { getMapInstance } from './map.js';
 
 let vehicleMarker;
 let spokenSteps = new Set();
