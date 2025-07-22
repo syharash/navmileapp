@@ -74,7 +74,7 @@ function getArrivalThreshold() {
 }
 
 
-function monitorDestinationProximity() {
+export function monitorDestinationProximity() {
   if (!selectedDestination || window.tripStatus !== "tracking") return;
 
   navigator.geolocation.watchPosition(
