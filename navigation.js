@@ -23,8 +23,12 @@ export function initVehicleTracking(directions) {
     position: null
   });
 
+  if (!directions?.routes?.[0]?.legs?.[0]?.steps) {
+  console.warn("🛑 Directions data missing or invalid.");
+  return;
+}
   const steps = directions.routes[0].legs[0].steps;
-
+  
   watchId = navigator.geolocation.watchPosition(
     pos => {
       const current = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
