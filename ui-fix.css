@@ -14,9 +14,7 @@
   .map-panel {
     min-height: 300px;
     height: auto;
-    width: 100%;
-    padding: 0;
-    order: 1;
+    flex-grow: 1;
   }
 
   .sidebar {
@@ -28,7 +26,8 @@
 
   #map {
     width: 100%;
-    height: calc(100% - 250px); /* Adjust for header, controls, etc. */
+    min-height: 300px;
+    height: 100%; /* Adjust for header, controls, etc. */
     max-height: 400px;
     background-color: #eef;
   }
