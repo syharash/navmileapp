@@ -60,7 +60,7 @@ export function getRoute(start, end) {
   });
 }
 
-function renderSteps(steps) {
+export function renderSteps(steps) {
   const panel = document.getElementById("directions-panel");
   panel.innerHTML = "";
 
@@ -75,7 +75,7 @@ function renderSteps(steps) {
   });
 }
 
-function getIconForManeuver(type) {
+export function getIconForManeuver(type) {
   const iconMap = {
     "turn-left": "⬅️", "turn-right": "➡️", "merge": "🔀",
     "ramp-left": "↖️", "ramp-right": "↘️", "roundabout-left": "⏪",
