@@ -47,10 +47,11 @@ window.onload = function () {
   };
 
   for (const [id, handler] of Object.entries(buttonHandlers)) {
-    const el = document.getElementById(id);
-    if (el) el.onclick = handler;
-    else console.warn(`🔍 Missing button with ID: ${id}`);
-  }
+  const el = document.getElementById(id);
+  if (el) el.onclick = () => handler(); // preserves `this` context
+  else console.warn(`🔍 Missing button with ID: ${id}`);
+}
+
 
   // 📝 Clear trip form inputs
   const purposeInput = document.getElementById("trip-purpose");
