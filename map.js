@@ -102,3 +102,6 @@ function stripHTML(html) {
 export function getMapInstance() {
   return map;
 }
+
+export { directionsRenderer };
+
