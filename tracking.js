@@ -90,7 +90,7 @@ window.MileApp = {
         }, 10000);
 
       }, () => showToast("⚠️ Unable to access GPS", "error"));
-    }, 100);
+    }, 300);
   },
 
   pauseTracking() {
