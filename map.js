@@ -1,5 +1,6 @@
 let map, directionsService;
 let mapInitialized = false;
+export const directionsRenderer = new google.maps.DirectionsRenderer();
 
 export function initMapServices() {
   const mapEl = document.getElementById("map");
@@ -36,8 +37,7 @@ export function initMapServices() {
     ]
   });
 
-  directionsService = new google.maps.DirectionsService();
-   export const directionsRenderer = new google.maps.DirectionsRenderer();
+   directionsService = new google.maps.DirectionsService();
    directionsRenderer = new google.maps.DirectionsRenderer({
     map: map,
     panel: document.getElementById("directions-panel"),
