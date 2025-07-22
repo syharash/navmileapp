@@ -9,6 +9,7 @@ import {
 import { initDestinationInput, monitorDestinationProximity } from './destination.js';
 import { loadTripHistory, downloadCSV, clearHistory } from './TripStore.js';
 import { directionsRenderer } from './map.js'; // Assuming exported from map.js
+import { logoutUser } from './auth.js';
 
 window.onload = function () {
   if (!window.MileApp) {
