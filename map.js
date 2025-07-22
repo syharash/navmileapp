@@ -38,7 +38,7 @@ export function initMapServices() {
 
   directionsService = new google.maps.DirectionsService();
 
-  directionsRenderer = new google.maps.DirectionsRenderer({
+  export directionsRenderer = new google.maps.DirectionsRenderer({
     map: map,
     panel: document.getElementById("directions-panel"),
     suppressMarkers: true
@@ -103,9 +103,3 @@ function stripHTML(html) {
 export function getMapInstance() {
   return map;
 }
-
-export function directionsRenderer() {
-  return map;
-}
-
-
