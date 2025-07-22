@@ -1,4 +1,4 @@
-import { getMapInstance } from './map.js';
+poimport { getMapInstance } from './map.js';
 
 let vehicleMarker;
 let spokenSteps = new Set();
@@ -61,7 +61,7 @@ function updateNavBanner(instruction) {
 }
 
 // 🔊 Speak text with interrupt handling
-function speakText(text) {
+export function speakText(text) {
   window.speechSynthesis.cancel(); // Prevent overlap
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = "en-US";
