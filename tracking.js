@@ -149,7 +149,7 @@ window.MileApp = {
         const leg = result.routes[0].legs[0];
         const map = getMapInstance();
         directionsRenderer.setDirections(result);
-        initVehicleTracking(map, result);
+        initVehicleTracking(result);
         localStorage.setItem("lastRoute", JSON.stringify(result));
 
         const distanceMi = (leg.distance.value / 1609.34).toFixed(2);
