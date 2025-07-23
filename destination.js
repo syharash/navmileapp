@@ -42,23 +42,11 @@ export function initDestinationInput() {
   console.log("✅ Standard Autocomplete initialized.");
 }
 
-// if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
- //   console.error("Autocomplete is not available. Check Maps API loading.");
- //   return;
- // }
+// ✅ Utility to check if a valid destination has been selected
+export function isDestinationValid() {
+  return selectedDestination instanceof google.maps.LatLng;
+}
 
-  // const autocomplete = new google.maps.places.Autocomplete(input, {
-  //  types: ["address"],
- //   fields: ["place_id", "geometry", "name"]
- // });
-
-  //autocomplete.addListener("place_changed", () => {
-  //  const place = autocomplete.getPlace();
-  //  console.log("Selected destination:", place);
- // });
-//}
- 
-// import { initMapServices } from './map.js';
 
 function handleDestination(lat, lng) {
   initMapServices(); // Ensure map is ready
