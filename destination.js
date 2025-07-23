@@ -14,6 +14,13 @@ export function initDestinationInput() {
   // ⬇️ Use place information here (e.g. store in state, center map)
   console.log("Selected destination:", place);
 });
+
+  if (place && place.geometry && place.geometry.location) {
+    selectedDestination = place.geometry.location;
+    destinationName = place.name || place.formatted_address || "your destination";
+    handleDestination(place.geometry.location.lat(), place.geometry.location.lng());
+  }
+});
   
  // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
  //   console.error("Autocomplete is not available. Check Maps API loading.");
