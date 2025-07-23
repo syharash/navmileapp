@@ -110,12 +110,16 @@
             <label for="voice-toggle">Voice Navigation:</label>
             <button id="voice-toggle">🔊 Voice On</button>
           </div>
+          <div id="trip-timer" class="info-banner hidden">Trip Time: 00:00:00</div>
+          <div id="map" class="map-panel"></div>
+          <div id="directions-panel" class="step-list hidden"></div>
         </section>
 
+        
         <!-- 📊 Trip Summary -->
         <section>
           <h3>Last Trip Summary</h3>
-          <div id="trip-summary">
+          <div id="trip-summary" class="trip-summary hidden">
             <p><strong>Status:</strong> <span id="tracking-status">Idle</span></p>
             <p><strong>Purpose:</strong> <span id="summary-purpose">–</span></p>
             <p><strong>Notes:</strong> <span id="summary-notes">–</span></p>
