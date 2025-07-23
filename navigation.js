@@ -23,7 +23,7 @@ export function initVehicleTracking(directions) {
   
   // 🛻 Proceed with setting up your vehicle marker below—
   // Assuming something like:
-  const vehicleMarker = new AdvancedMarkerElement({
+  vehicleMarker = new AdvancedMarkerElement({
   map,
   position: null,
   content: vehicleIconElement
