@@ -20,7 +20,7 @@ export function initDestinationInput() {
     destinationName = place.name || place.formatted_address || "your destination";
     handleDestination(place.geometry.location.lat(), place.geometry.location.lng());
   }
-});
+};
   
  // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
  //   console.error("Autocomplete is not available. Check Maps API loading.");
