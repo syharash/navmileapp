@@ -12,6 +12,7 @@ export function initVehicleTracking(directions) {
     return;
   }
 
+  // 🖼️ Vehicle icon as a reusable DOM element
   const vehicleIconElement = (() => {
     const img = document.createElement('img');
     img.src = "car-icon.svg";
@@ -21,11 +22,13 @@ export function initVehicleTracking(directions) {
   })();
 
   const markerNamespace = google.maps.marker;
+
+  // 🧠 Unified marker setup: AdvancedMarkerElement if available, fallback otherwise
   if (markerNamespace?.AdvancedMarkerElement) {
     const { AdvancedMarkerElement } = markerNamespace;
     vehicleMarker = new AdvancedMarkerElement({
       map,
-      position: null,
+      position: null, // ⛳ Safe placeholder until GPS kicks in
       content: vehicleIconElement
     });
   } else {
@@ -33,9 +36,13 @@ export function initVehicleTracking(directions) {
     vehicleMarker = new google.maps.Marker({
       map,
       position: null,
-      icon: "car-icon.svg" // ⛳ Fallback to basic icon; replace if you have a fallbackIconUrl
+      icon: "car-icon.svg" // 🎯 Reusing same asset for simplicity
     });
   }
+
+  // 📌 Removed second, redundant instantiation of vehicleMarker here.
+  // You previously rebuilt the same marker with a new content block.
+  // That’s now consolidated above.
 
   if (!directions?.routes?.[0]?.legs?.[0]?.steps) {
     console.warn("🛑 Directions data missing or invalid.");
@@ -44,19 +51,20 @@ export function initVehicleTracking(directions) {
 
   const steps = directions.routes[0].legs[0].steps;
 
+  // 📡 Start GPS tracking and update marker position dynamically
   watchId = navigator.geolocation.watchPosition(
     pos => {
       const current = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      if (vehicleMarker) vehicleMarker.position = current;
-      map.panTo(current);
-      speakUpcomingInstruction(current, steps);
+      if (vehicleMarker) vehicleMarker.position = current; // 🔄 Updates live position
+      map.panTo(current); // 🎯 Keeps map centered on vehicle
+      speakUpcomingInstruction(current, steps); // 🔊 Triggers voice prompt
     },
     err => console.error("🛑 Tracking error:", err),
     { enableHighAccuracy: true, maximumAge: 1000 }
   );
 }
 
-// 🗣️ Determine which instruction to speak next
+// 🗣️ Check proximity and trigger voice navigation
 function speakUpcomingInstruction(current, steps) {
   if (!window.voiceGuidanceEnabled) return;
 
@@ -73,43 +81,43 @@ function speakUpcomingInstruction(current, steps) {
   });
 }
 
-// 📋 Update visible navigation banner
+// 🪧 Show current step in UI banner
 function updateNavBanner(instruction) {
   const el = document.getElementById("nav-banner");
   if (el) el.textContent = `Next: ${instruction}`;
 }
 
-// 🔊 Speak text with interrupt handling
+// 🔊 Text-to-speech with interrupt control
 export function speakText(text) {
-  window.speechSynthesis.cancel();
+  window.speechSynthesis.cancel(); // ⚠ Prevent overlapping speech
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = "en-US";
   window.speechSynthesis.speak(msg);
 }
 
-// 🎯 Announce arrival at destination
+// 🏁 Trigger arrival voice cue
 export function speakArrival(destinationName) {
   speakText(`You've arrived at ${destinationName}. Trip ended.`);
 }
 
-// 🧹 Clean up map, speech, and tracking
+// 🧹 Clear map, speech, and GPS tracking
 export function resetNavigation() {
   if (vehicleMarker) {
-    vehicleMarker.setMap(null);
+    vehicleMarker.setMap(null); // 🧽 Remove from map
     vehicleMarker = null;
   }
 
   spokenSteps.clear();
-  window.speechSynthesis.cancel();
+  window.speechSynthesis.cancel(); // 🧼 Stop any ongoing speech
   updateNavBanner("");
 
   if (watchId !== null) {
-    navigator.geolocation.clearWatch(watchId);
+    navigator.geolocation.clearWatch(watchId); // 🛑 Stop live tracking
     watchId = null;
   }
 }
 
-// 🧼 Safely strip HTML tags from instruction text
+// 🧼 Strip HTML tags from step instructions
 function stripHTML(html) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
