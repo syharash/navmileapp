@@ -7,32 +7,40 @@ let debounceTimeout;
 
 // Initialize Places Autocomplete input
 export function initDestinationInput() {
-  const autocompleteElement = document.getElementById("destination-autocomplete");
+  const autocompleteEl = document.getElementById("destination-autocomplete");
 
-  if (!autocompleteElement) {
-    console.warn("Destination input element not found.");
+  if (!autocompleteEl) {
+    console.warn("🔍 Autocomplete element not found.");
     return;
   }
 
- autocompleteElement.addEventListener("gmpx-placeautocomplete-select", (event) => {
-  const place = event.detail;
+  autocompleteEl.addEventListener("gmpx-placeautocomplete-select", (event) => {
+    const place = event.detail;
 
-  if (!place || !place.geometry || !place.geometry.location) {
-    console.warn("Invalid destination selected:", place);
-    return;
-  }
+    if (!place || !place.geometry || !place.geometry.location) {
+      console.warn("⚠️ Invalid place selected:", place);
+      return;
+    }
 
-  selectedDestination = place.geometry.location;
-  destinationName = place.displayName || place.name || place.formattedAddress || "your destination";
+    const lat = place.geometry.location.lat;
+    const lng = place.geometry.location.lng;
 
-  handleDestination(
-    place.geometry.location.lat,
-    place.geometry.location.lng
-  );
+    selectedDestination = new google.maps.LatLng(lat, lng);
+    destinationName = place.displayName || place.name || place.formattedAddress || "your destination";
 
-  console.log("📍 Destination selected:", destinationName);
+    console.log("📍 Selected:", destinationName, lat, lng);
+
+    handleDestination(lat, lng);
+    optionallyExpandDirectionsPanel();
+
+    if (window.voiceGuidanceEnabled && typeof speakArrival === "function") {
+      speakArrival(destinationName);
+    }
   });
+
+  console.log("✅ Destination autocomplete initialized.");
 }
+
 
 
  // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
