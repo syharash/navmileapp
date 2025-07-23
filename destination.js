@@ -7,8 +7,14 @@ let debounceTimeout;
 
 // Initialize Places Autocomplete input
 export function initDestinationInput() {
-  const input = document.getElementById("destination-input");
-
+  const autocompleteElement = document.getElementById("destination-autocomplete");
+  
+  autocompleteElement.addEventListener("placechange", () => {
+  const place = autocompleteElement.getPlace();
+  // ⬇️ Use place information here (e.g. store in state, center map)
+  console.log("Selected destination:", place);
+});
+  
   if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
     console.error("Autocomplete is not available. Check Maps API loading.");
     return;
