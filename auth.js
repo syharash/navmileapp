@@ -21,7 +21,7 @@ export function handleLogin(response) {
   if (loginScreen) loginScreen.style.display = "none";
 
   const container = document.querySelector(".container");
-  if (container) container.style.display = "block";
+  if (container) container.classList.remove("hidden");
 
   const rateInput = document.getElementById("rate");
   if (rateInput) rateInput.value = "0.655"; // Default mileage rate
