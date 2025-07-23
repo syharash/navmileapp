@@ -115,6 +115,13 @@
   transition: max-height 0.3s ease;
 }
 /* === Trip Tracking UI Cleanup — July 2025 === */
+.logo {
+  width: 120px;
+  max-width: 25vw;
+  max-height: 160px;
+  object-fit: contain;
+  margin-bottom: 16px;
+}
 
 .button-row {
   display: flex;
@@ -149,4 +156,3 @@
   border-radius: 8px;
   margin-top: 16px;
 }
-
