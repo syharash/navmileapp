@@ -3,6 +3,7 @@ import { showToast } from './ui.js';
 let selectedDestination = null;
 let destinationName = "";
 import { initMapServices, getMapInstance } from './map.js';
+let debounceTimeout;
 
 // Initialize Places Autocomplete input
 export function initDestinationInput() {
@@ -13,15 +14,23 @@ export function initDestinationInput() {
   }
 
   autocompleteEl.addEventListener("gmp-placechange", (event) => {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
     const place = event.detail;
+      if (!place || !place.location) {
+        console.warn(""⚠️ Invalid place object.");
+        return;
+      }
+      
     selectedDestination = place.location;
     destinationName = place.displayName || "Destination";
 
     showToast(`📍 Destination set: ${destinationName}`, "success");
     startDestinationWatcher();
+    }, 300);
   });
-}
-
+}  
+ 
 // import { initMapServices } from './map.js';
 
 function handleDestination(lat, lng) {
