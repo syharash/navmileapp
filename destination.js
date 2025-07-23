@@ -7,29 +7,29 @@ let debounceTimeout;
 
 // Initialize Places Autocomplete input
 export function initDestinationInput() {
-  const autocompleteEl = document.getElementById("destination-autocomplete");
-  if (!autocompleteEl) {
-    console.warn("⚠️ Destination autocomplete element not found.");
+  const inputEl = document.getElementById("destination-input");
+  if (!inputEl) {
+    console.warn("⚠️ Destination input field not found.");
     return;
   }
 
-  autocompleteEl.addEventListener("gmp-placechange", (event) => {
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-    const place = event.detail;
-      if (!place || !place.location) {
-        console.warn("⚠️ Invalid place object.");
-        return;
-      }
-      
-    selectedDestination = place.location;
-    destinationName = place.displayName || "Destination";
+  const autocomplete = new google.maps.places.Autocomplete(inputEl);
+  autocomplete.setFields(["geometry", "name"]);
+
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (!place.geometry || !place.geometry.location) {
+      console.warn("❌ Selected place has no geometry.");
+      return;
+    }
+
+    selectedDestination = place.geometry.location;
+    destinationName = place.name || "Destination";
 
     showToast(`📍 Destination set: ${destinationName}`, "success");
     startDestinationWatcher();
-    }, 300);
   });
-}  
+}
  
 // import { initMapServices } from './map.js';
 
