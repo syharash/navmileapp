@@ -12,10 +12,13 @@ export function initVehicleTracking(directions) {
     return;
   }
 
-  const vehicleIcon = {
-    url: "car-icon.svg",
-    scaledSize: new google.maps.Size(40, 40)
-  };
+  const vehicleIconElement = (() => {
+  const img = document.createElement('img');
+  img.src = "car-icon.svg";
+  img.style.width = "40px";
+  img.style.height = "40px";
+  return img;
+})();
 
  const markerNamespace = google.maps.marker;
  if (markerNamespace?.AdvancedMarkerElement) {
