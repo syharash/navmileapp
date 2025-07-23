@@ -13,6 +13,7 @@ let tripStart = null;
 let tripEnd = null;
 let pauseStartTime = null;
 let totalPauseDuration = 0;
+let currentPostion;
 
 // === Retry wrapper for vehicle tracking initialization ===
 function tryInitializeTracking(result, retries = 3) {
