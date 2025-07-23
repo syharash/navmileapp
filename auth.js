@@ -1,3 +1,4 @@
+import { initDestinationInput } from './destination.js'; // ⬅️ Add at top if not present
 import { showToast, updateControls } from './ui.js';
 import { loadTripHistory, updateSummary } from './TripStore.js';
 import { resetTripLog } from './TripStore.js';
@@ -24,7 +25,9 @@ export function handleLogin(response) {
 
   const rateInput = document.getElementById("rate");
   if (rateInput) rateInput.value = "0.655"; // Default mileage rate
-
+  
+  initDestinationInput(); // ✅ Attach destination listener
+  
   setTimeout(loadTripHistory, 300); // Let DOM settle before loading
   updateControls();
   showToast("✅ Signed in successfully");
