@@ -40,6 +40,15 @@ window.onload = function () {
   updateControls();
   loadTripHistory();
 
+  // ✅ Confirm PlaceAutocompleteElement readiness
+  customElements.whenDefined('gmpx-place-autocomplete')
+    .then(() => {
+      console.log("✅ PlaceAutocompleteElement ready");
+    })
+    .catch(() => {
+      console.warn("⚠️ Autocomplete element not loaded");
+    });
+  
   // ⚙️ Register service worker
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js")
