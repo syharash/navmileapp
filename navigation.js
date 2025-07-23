@@ -1,5 +1,7 @@
 import { getMapInstance } from './map.js';
-
+img.src = "Copilot.png";
+img.style.width = "40px"
+img.style.height = "40px";
 let vehicleMarker;
 let spokenSteps = new Set();
 let watchId = null;
