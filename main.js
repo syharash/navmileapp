@@ -16,11 +16,19 @@ import { logoutUser } from './auth.js';
 
 function onMapsReady() {
   if (window.google && google.maps && google.maps.places) {
-    initDestinationInput(); // Now it’s safe to call
+    customElements.whenDefined('gmpx-place-autocomplete')
+      .then(() => {
+        initDestinationInput();
+        console.log("✅ Autocomplete component ready, input initialized.");
+      })
+      .catch(() => {
+        console.warn("⚠️ Autocomplete component did not upgrade in time.");
+      });
   } else {
     console.error("Google Maps Places API failed to load.");
   }
 }
+
 window.onMapsReady = onMapsReady;
 
 window.onload = function () {
