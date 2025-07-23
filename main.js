@@ -11,6 +11,14 @@ import { loadTripHistory, downloadCSV, clearHistory } from './TripStore.js';
 import { directionsRenderer } from './map.js'; // Assuming exported from map.js
 import { logoutUser } from './auth.js';
 
+function onMapsReady() {
+  if (window.google && google.maps && google.maps.places) {
+    initDestinationInput(); // Now it’s safe to call
+  } else {
+    console.error("Google Maps Places API failed to load.");
+  }
+}
+
 window.onload = function () {
   if (!window.MileApp) {
     console.error("🚫 MileApp not available — tracking functions can't be bound yet.");
