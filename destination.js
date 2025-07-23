@@ -15,20 +15,20 @@ export function initDestinationInput() {
   console.log("Selected destination:", place);
 });
   
-  if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
-    console.error("Autocomplete is not available. Check Maps API loading.");
-    return;
-  }
+ // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
+ //   console.error("Autocomplete is not available. Check Maps API loading.");
+ //   return;
+ // }
 
-  const autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ["address"],
-    fields: ["place_id", "geometry", "name"]
-  });
+  // const autocomplete = new google.maps.places.Autocomplete(input, {
+  //  types: ["address"],
+ //   fields: ["place_id", "geometry", "name"]
+ // });
 
-  autocomplete.addListener("place_changed", () => {
-    const place = autocomplete.getPlace();
-    console.log("Selected destination:", place);
-  });
+  //autocomplete.addListener("place_changed", () => {
+  //  const place = autocomplete.getPlace();
+  //  console.log("Selected destination:", place);
+ // });
 }
  
 // import { initMapServices } from './map.js';
