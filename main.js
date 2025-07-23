@@ -1,3 +1,6 @@
+import { watchDestinationSelection } from './tracking.js';
+watchDestinationSelection();
+
 import {
   initVoiceToggle,
   initDirectionsPanelToggle,
