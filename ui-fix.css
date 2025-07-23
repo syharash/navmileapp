@@ -4,6 +4,11 @@
   z-index: 999;
   pointer-events: auto;
 }
+
+#gmpx-autocomplete-container {
+  border: 1px solid red;
+}
+
 /* === Mobile-Specific UI Fixes === */
 @media (max-width: 1200px) {
   body {
