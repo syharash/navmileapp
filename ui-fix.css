@@ -158,3 +158,27 @@
   border-radius: 8px;
   margin-top: 16px;
 }
+/* 🧼 Login Screen Cleanup for Mobile */
+#login-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.login-wrapper {
+  max-width: 320px;
+  width: 100%;
+  padding: 24px;
+}
+
+.logo {
+  width: 120px;
+  max-width: 30vw;
+  height: auto;
+  margin-bottom: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
