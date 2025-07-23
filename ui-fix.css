@@ -12,7 +12,7 @@
 /* === Mobile-Specific UI Fixes === */
 @media (max-width: 1200px) {
   body {
-    font-size: 16x;
+    font-size: 16px;
   }
 }
 
@@ -117,14 +117,14 @@
 
 /* === Trip Tracking UI Cleanup — July 2025 === */
 .logo {
-  width: 250px;
-  max-width: 25vw;
-  max-height: 200px;
-  object-fit: contain;
+  width: 120px;
+  max-width: 30vw;
+  height: auto;
   margin-bottom: 16px;
-  justify-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 .button-row {
   display: flex;
   gap: 12px;
@@ -160,6 +160,7 @@
 }
 /* 🧼 Login Screen Cleanup for Mobile */
 #login-screen {
+  background: #f9f9f9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,12 +174,4 @@
   padding: 24px;
 }
 
-.logo {
-  width: 120px;
-  max-width: 30vw;
-  height: auto;
-  margin-bottom: 16px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
+
