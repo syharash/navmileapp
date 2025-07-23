@@ -54,8 +54,11 @@
 
       <div class="field-group">
         <label for="destination-autocomplete">Destination:</label>
-      <!-- ✅ Use a standard input field -->
-        <input id="destination-input" type="text" style="width: 100%;" placeholder="Start typing address…" />
+        <gmpx-place-autocomplete
+          id="destination-autocomplete"
+          style="width: 100%;"
+          placeholder="Start typing address…"
+        ></gmpx-place-autocomplete>
       </div>
 
       <div class="field-group">
