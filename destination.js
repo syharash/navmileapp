@@ -36,7 +36,7 @@ export function initDestinationInput() {
   //  const place = autocomplete.getPlace();
   //  console.log("Selected destination:", place);
  // });
-}
+//}
  
 // import { initMapServices } from './map.js';
 
