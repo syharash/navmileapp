@@ -114,3 +114,39 @@
   overflow-y: auto;
   transition: max-height 0.3s ease;
 }
+/* === Trip Tracking UI Cleanup — July 2025 === */
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  justify-content: center;
+}
+
+.info-banner {
+  background: #f5f5f5;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 1.1em;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.step-list {
+  padding: 10px 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid #ccc;
+}
+
+.trip-summary {
+  background: #eef;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
