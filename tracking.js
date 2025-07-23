@@ -14,6 +14,20 @@ let tripEnd = null;
 let pauseStartTime = null;
 let totalPauseDuration = 0;
 
+// === Retry wrapper for vehicle tracking initialization ===
+function tryInitializeTracking(result, retries = 3) {
+  const markerNamespace = google.maps.marker;
+  if (markerNamespace?.AdvancedMarkerElement) {
+    initVehicleTracking(result);
+  } else if (retries > 0) {
+    console.warn('AdvancedMarkerElement not ready. Retrying...');
+    setTimeout(() => tryInitializeTracking(result, retries - 1), 1000);
+  } else {
+    console.error('AdvancedMarkerElement unavailable after retries. Falling back.');
+    initVehicleTracking(result); // Optional: call with fallback logic inside
+  }
+}
+
 window.tripStatus = 'idle';
 
 // === Input watcher: destination selection ===
@@ -169,7 +183,7 @@ window.MileApp = {
         const leg = result.routes[0].legs[0];
         const map = getMapInstance();
         directionsRenderer.setDirections(result);
-        initVehicleTracking(result);
+        tryInitializeTracking(result);
         localStorage.setItem("lastRoute", JSON.stringify(result));
 
         const distanceMi = (leg.distance.value / 1609.34).toFixed(2);
