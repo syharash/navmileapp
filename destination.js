@@ -18,7 +18,7 @@ export function initDestinationInput() {
     debounceTimeout = setTimeout(() => {
     const place = event.detail;
       if (!place || !place.location) {
-        console.warn(""⚠️ Invalid place object.");
+        console.warn("⚠️ Invalid place object.");
         return;
       }
       
