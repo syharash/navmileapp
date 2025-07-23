@@ -105,4 +105,5 @@ export function getMapInstance() {
 
 export { directionsRenderer };
 export { directionsService };
+window.initMapServices = initMapServices;
 
