@@ -6,7 +6,7 @@ import { initMapServices, getMapInstance } from './map.js';
 let debounceTimeout;
 
 // Initialize Places Autocomplete input
-function initDestinationInput() {
+export function initDestinationInput() {
   const input = document.getElementById("destination-input");
 
   if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
