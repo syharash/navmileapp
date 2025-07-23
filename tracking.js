@@ -93,14 +93,14 @@ window.MileApp = {
         };
 
         tripStart = {
-          latitude: latLng.lat,
-          longitude: latLng.lng,
+          latitude: LatLng.lat,
+          longitude: LatLng.lng,
           timestamp: Date.now()
         };
 
-        trackingPath.push(latLng);
+        trackingPath.push(LatLng);
         trackingPolyline.setPath(trackingPath);
-        map.setCenter(latLng);
+        map.setCenter(LatLng);
         google.maps.event.trigger(map, 'resize');
 
         tracking = true;
