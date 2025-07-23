@@ -17,11 +17,20 @@ export function initVehicleTracking(directions) {
     scaledSize: new google.maps.Size(40, 40)
   };
 
-  vehicleMarker = new google.maps.Marker({
-    map: map,
-    icon: vehicleIcon,
-    position: null
-  });
+  const { AdvancedMarkerElement } = google.maps.marker;
+
+vehicleMarker = new AdvancedMarkerElement({
+  map: map,
+  position: null,
+  content: (() => {
+    const img = document.createElement('img');
+    img.src = "car-icon.svg";
+    img.style.width = "40px";
+    img.style.height = "40px";
+    return img;
+  })()
+});
+
 
   if (!directions?.routes?.[0]?.legs?.[0]?.steps) {
   console.warn("🛑 Directions data missing or invalid.");
@@ -32,7 +41,7 @@ export function initVehicleTracking(directions) {
   watchId = navigator.geolocation.watchPosition(
     pos => {
       const current = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      vehicleMarker.setPosition(current);
+      vehicleMarker.position = current;
       map.panTo(current);
       speakUpcomingInstruction(current, steps);
     },
