@@ -7,26 +7,27 @@ let debounceTimeout;
 
 // Initialize Places Autocomplete input
 export function initDestinationInput() {
-  const autocompleteEl = document.getElementById("destination-autocomplete");
-
-  if (!autocompleteEl) {
-    console.warn("🔍 Autocomplete element not found.");
+  const inputEl = document.getElementById("destination-input");
+  if (!inputEl) {
+    console.warn("🔍 Destination input not found.");
     return;
   }
 
-  autocompleteEl.addEventListener("gmpx-placeautocomplete-select", (event) => {
-    const place = event.detail;
+  const autocomplete = new google.maps.places.Autocomplete(inputEl);
+
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
 
     if (!place || !place.geometry || !place.geometry.location) {
       console.warn("⚠️ Invalid place selected:", place);
       return;
     }
 
-    const lat = place.geometry.location.lat;
-    const lng = place.geometry.location.lng;
+    const lat = place.geometry.location.lat();
+    const lng = place.geometry.location.lng();
 
     selectedDestination = new google.maps.LatLng(lat, lng);
-    destinationName = place.displayName || place.name || place.formattedAddress || "your destination";
+    destinationName = place.name || place.formatted_address || "your destination";
 
     console.log("📍 Selected:", destinationName, lat, lng);
 
@@ -38,12 +39,10 @@ export function initDestinationInput() {
     }
   });
 
-  console.log("✅ Destination autocomplete initialized.");
+  console.log("✅ Standard Autocomplete initialized.");
 }
 
-
-
- // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
+// if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
  //   console.error("Autocomplete is not available. Check Maps API loading.");
  //   return;
  // }
