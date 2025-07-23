@@ -2,6 +2,7 @@ import { showToast, safeUpdate, updateStatus, updateControls } from './ui.js';
 import { initMapServices, getMapInstance, directionsRenderer, directionsService, getRoute, renderSteps } from './map.js';
 import { logTrip } from './TripStore.js';
 import { speakText, initVehicleTracking} from './navigation.js';
+import { isDestinationValid() } from './destination.js';
 
 
 let trackingPath = [];
@@ -57,6 +58,10 @@ window.MileApp = {
   },
 
   startTracking() {
+    if (!isDestinationValid()) {
+    alert("⚠️ Please select a destination before starting the trip.");
+    return;
+  }
     document.querySelector(".map-panel").style.display = "flex";
     this.updateStatusBar("Tracking");
 
