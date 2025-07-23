@@ -53,23 +53,19 @@
         <p id="userBadge"></p>
 
       <div class="field-group">
-      <label for="destination-autocomplete">Destination:</label>
-      <gmp-place-autocomplete
-        id="destination-autocomplete"
-        style="width: 100%;"
-        placeholder="Start typing address…">
-      </gmp-place-autocomplete>
+        <label for="destination-autocomplete">Destination:</label>
+      <!-- ✅ Use a standard input field -->
+        <input id="destination-input" type="text" style="width: 100%;" placeholder="Start typing address…" />
       </div>
 
-
-        <div class="field-group">
-          <label for="arrival-threshold">Arrival Sensitivity:</label>
-          <select id="arrival-threshold">
-            <option value="50">Strict (50m)</option>
-            <option value="100" selected>Normal (100m)</option>
-            <option value="200">Relaxed (200m)</option>
-          </select>
-        </div>
+      <div class="field-group">
+        <label for="arrival-threshold">Arrival Sensitivity:</label>
+        <select id="arrival-threshold">
+        <option value="50">Strict (50m)</option>
+        <option value="100" selected>Normal (100m)</option>
+        <option value="200">Relaxed (200m)</option>
+        </select>
+      </div>
 
         <div class="field-group">
           <label for="trip-purpose">Purpose / Client:</label>
