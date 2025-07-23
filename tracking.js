@@ -230,6 +230,10 @@ window.MileApp = {
       updateStatus("Trip Complete");
       updateControls();
       tripStart = tripEnd = null;
+      // 🚮 Clear destination input and internal state
+          document.getElementById("destination-input").value = "";
+          window.selectedDestination = null;
+          window.destinationName = "";
     }, () => {
       showToast("⚠️ GPS access failed", "error");
       updateStatus("Trip Complete");
