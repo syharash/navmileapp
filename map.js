@@ -1,6 +1,6 @@
 let map, directionsService, directionsRenderer;
 let mapInitialized = false;
- 
+
 export function initMapServices() {
   const mapEl = document.getElementById("map");
   if (!mapEl || mapEl.offsetHeight === 0) {
@@ -9,35 +9,26 @@ export function initMapServices() {
   }
   if (mapInitialized || map) return; // Avoid multiple inits
   mapInitialized = true;
-  
-  if (map) return;
+
   const sacramento = { lat: 38.5816, lng: -121.4944 };
-  map = new google.maps.Map(document.getElementById("map"), {
+
+  map = new google.maps.Map(mapEl, {
     center: sacramento,
     zoom: 14,
     disableDefaultUI: true,
     mapTypeControl: false,
     fullscreenControl: false,
     streetViewControl: false,
+    mapId: "d9b09fc06f123f1721b83989", // 🔑 Insert your actual Map ID here
     styles: [
-      {
-        featureType: "poi",
-        stylers: [{ visibility: "off" }]
-      },
-      {
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [{ color: "#00BFFF" }]
-      },
-      {
-        elementType: "labels.icon",
-        stylers: [{ visibility: "off" }]
-      }
+      { featureType: "poi", stylers: [{ visibility: "off" }] },
+      { featureType: "road", elementType: "geometry", stylers: [{ color: "#00BFFF" }] },
+      { elementType: "labels.icon", stylers: [{ visibility: "off" }] }
     ]
   });
 
-   directionsService = new google.maps.DirectionsService();
-   directionsRenderer = new google.maps.DirectionsRenderer({
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer({
     map: map,
     panel: document.getElementById("directions-panel"),
     suppressMarkers: true
@@ -106,4 +97,3 @@ export function getMapInstance() {
 export { directionsRenderer };
 export { directionsService };
 window.initMapServices = initMapServices;
-
