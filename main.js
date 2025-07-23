@@ -18,6 +18,7 @@ function onMapsReady() {
     console.error("Google Maps Places API failed to load.");
   }
 }
+window.onMapsReady = onMapsReady;
 
 window.onload = function () {
   if (!window.MileApp) {
