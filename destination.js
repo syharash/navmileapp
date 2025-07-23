@@ -17,18 +17,23 @@ export function initDestinationInput() {
   autocompleteElement.addEventListener("placechange", () => {
     const place = autocompleteElement.getPlace();
 
-    if (place && place.geometry && place.geometry.location) {
-      selectedDestination = place.geometry.location;
-      destinationName = place.name || place.formatted_address || "your destination";
-
-      handleDestination(place.geometry.location.lat(), place.geometry.location.lng());
-
-      console.log("Selected destination:", place);
-    } else {
-      console.warn("Incomplete place data:", place);
+    if (!place || !place.geometry || !place.geometry.location) {
+      console.warn("Invalid destination selected:", place);
+      return;
     }
+
+    selectedDestination = place.geometry.location;
+    destinationName = place.name || place.formatted_address || "your destination";
+
+    handleDestination(
+      place.geometry.location.lat(),
+      place.geometry.location.lng()
+    );
+
+    console.log("📍 Destination selected:", destinationName);
   });
 }
+
 
  // if (!window.google || !google.maps || !google.maps.places || !google.maps.places.Autocomplete) {
  //   console.error("Autocomplete is not available. Check Maps API loading.");
