@@ -87,7 +87,7 @@ window.MileApp = {
       });
 
       navigator.geolocation.getCurrentPosition(pos => {
-        const latLng = {
+        currentPosition = {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         };
