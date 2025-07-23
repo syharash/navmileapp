@@ -1,7 +1,5 @@
 import { getMapInstance } from './map.js';
-img.src = "Copilot.png";
-img.style.width = "40px"
-img.style.height = "40px";
+
 let vehicleMarker;
 let spokenSteps = new Set();
 let watchId = null;
@@ -17,9 +15,10 @@ export function initVehicleTracking(directions) {
   // 🖼️ Vehicle icon as a reusable DOM element
   const vehicleIconElement = (() => {
     const img = document.createElement('img');
-    img.src = "car-icon.svg";
-    img.style.width = "40px";
+    img.src = "Copilot.png";
+    img.style.width = "40px"
     img.style.height = "40px";
+    img.style.objectFit = "contain";
     return img;
   })();
 
