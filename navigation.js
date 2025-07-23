@@ -13,60 +13,41 @@ export function initVehicleTracking(directions) {
   }
 
   const vehicleIconElement = (() => {
-  const img = document.createElement('img');
-  img.src = "car-icon.svg";
-  img.style.width = "40px";
-  img.style.height = "40px";
-  return img;
-})();
-
- const markerNamespace = google.maps.marker;
- if (markerNamespace?.AdvancedMarkerElement) {
-  const { AdvancedMarkerElement } = markerNamespace;
-  
-  // 🛻 Proceed with setting up your vehicle marker below—
-  // Assuming something like:
-  vehicleMarker = new AdvancedMarkerElement({
-  map,
-  position: null,
-  content: vehicleIconElement
-});
-
-// ...and attach it to your tracking flow
-} else {
-  console.warn('AdvancedMarkerElement not available. Delaying marker setup.');
-  // ⏳ You could retry this block later or use a basic fallback marker:
-  const fallbackMarker = new google.maps.Marker({
-    map,
-    position: null,
-    icon: fallbackIconUrl
-  });
-}
-
-
-vehicleMarker = new AdvancedMarkerElement({
-  map: map,
-  position: null,
-  content: (() => {
     const img = document.createElement('img');
     img.src = "car-icon.svg";
     img.style.width = "40px";
     img.style.height = "40px";
     return img;
-  })()
-});
+  })();
 
+  const markerNamespace = google.maps.marker;
+  if (markerNamespace?.AdvancedMarkerElement) {
+    const { AdvancedMarkerElement } = markerNamespace;
+    vehicleMarker = new AdvancedMarkerElement({
+      map,
+      position: null,
+      content: vehicleIconElement
+    });
+  } else {
+    console.warn('AdvancedMarkerElement not available. Using fallback marker.');
+    vehicleMarker = new google.maps.Marker({
+      map,
+      position: null,
+      icon: "car-icon.svg" // ⛳ Fallback to basic icon; replace if you have a fallbackIconUrl
+    });
+  }
 
   if (!directions?.routes?.[0]?.legs?.[0]?.steps) {
-  console.warn("🛑 Directions data missing or invalid.");
-  return;
-}
+    console.warn("🛑 Directions data missing or invalid.");
+    return;
+  }
+
   const steps = directions.routes[0].legs[0].steps;
-  
+
   watchId = navigator.geolocation.watchPosition(
     pos => {
       const current = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-      vehicleMarker.position = current;
+      if (vehicleMarker) vehicleMarker.position = current;
       map.panTo(current);
       speakUpcomingInstruction(current, steps);
     },
@@ -100,7 +81,7 @@ function updateNavBanner(instruction) {
 
 // 🔊 Speak text with interrupt handling
 export function speakText(text) {
-  window.speechSynthesis.cancel(); // Prevent overlap
+  window.speechSynthesis.cancel();
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = "en-US";
   window.speechSynthesis.speak(msg);
