@@ -251,7 +251,8 @@ window.MileApp = {
     const leg = result.routes[0].legs[0];
     const map = getMapInstance();
     directionsRenderer.setDirections(result);
-    initVehicleTracking(map, result);
+    tryInitializeTracking(result);
+
 
     safeUpdate("summary-start", leg.start_address);
     safeUpdate("summary-end", leg.end_address);
