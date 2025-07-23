@@ -14,23 +14,23 @@ export function initDestinationInput() {
     return;
   }
 
-  autocompleteElement.addEventListener("placechange", () => {
-    const place = autocompleteElement.getPlace();
+ autocompleteElement.addEventListener("gmpx-placeautocomplete-select", (event) => {
+  const place = event.detail;
 
-    if (!place || !place.geometry || !place.geometry.location) {
-      console.warn("Invalid destination selected:", place);
-      return;
-    }
+  if (!place || !place.geometry || !place.geometry.location) {
+    console.warn("Invalid destination selected:", place);
+    return;
+  }
 
-    selectedDestination = place.geometry.location;
-    destinationName = place.name || place.formatted_address || "your destination";
+  selectedDestination = place.geometry.location;
+  destinationName = place.displayName || place.name || place.formattedAddress || "your destination";
 
-    handleDestination(
-      place.geometry.location.lat(),
-      place.geometry.location.lng()
-    );
+  handleDestination(
+    place.geometry.location.lat,
+    place.geometry.location.lng
+  );
 
-    console.log("📍 Destination selected:", destinationName);
+  console.log("📍 Destination selected:", destinationName);
   });
 }
 
