@@ -13,6 +13,10 @@
 
   <!-- ✅ Core Maps API (Only Once) -->
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAInvy6GdRdnuYVJGlde1gX0VINpU5AsJI&libraries=places,marker&callback=onMapsReady&loading=async&modules=place"></script>
+<script
+  src="https://www.gstatic.com/maps-platform/places-autocomplete-element@1.0.0/place-autocomplete-element.min.js"
+  defer
+></script>
   
 
 
@@ -54,6 +58,7 @@
       <aside class="sidebar">
         <p id="userBadge"></p>
 
+      <div class="field-group">
         <label for="destination-autocomplete">Destination:</label>
         <gmpx-place-autocomplete
           id="destination-autocomplete"
@@ -61,6 +66,7 @@
           aria-label="Destination address input"
           placeholder="Enter Destination"
         ></gmpx-place-autocomplete>
+      </div> 
      
 
       <div class="field-group">
