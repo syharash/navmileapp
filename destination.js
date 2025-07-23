@@ -1,4 +1,5 @@
 // === destination.js ===
+import { showToast } from './ui.js';
 let selectedDestination = null;
 let destinationName = "";
 import { initMapServices, getMapInstance } from './map.js';
