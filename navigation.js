@@ -17,7 +17,28 @@ export function initVehicleTracking(directions) {
     scaledSize: new google.maps.Size(40, 40)
   };
 
-  const { AdvancedMarkerElement } = google.maps.marker;
+ const markerNamespace = google.maps.marker;
+ if (markerNamespace?.AdvancedMarkerElement) {
+  const { AdvancedMarkerElement } = markerNamespace;
+  
+  // 🛻 Proceed with setting up your vehicle marker below—
+  // Assuming something like:
+  const vehicleMarker = new AdvancedMarkerElement({
+    map,
+    position: currentPosition,
+    content: vehicleIconElement
+  });
+  // ...and attach it to your tracking flow
+} else {
+  console.warn('AdvancedMarkerElement not available. Delaying marker setup.');
+  // ⏳ You could retry this block later or use a basic fallback marker:
+  const fallbackMarker = new google.maps.Marker({
+    map,
+    position: currentPosition,
+    icon: fallbackIconUrl
+  });
+}
+
 
 vehicleMarker = new AdvancedMarkerElement({
   map: map,
