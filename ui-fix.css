@@ -1,10 +1,15 @@
+/* UI patch: fix Destination input interaction */
+#destinationInput {
+  position: relative;
+  z-index: 999;
+  pointer-events: auto;
+}
 /* === Mobile-Specific UI Fixes === */
 @media (max-width: 1200px) {
   body {
     font-size: 16x;
   }
 }
-
 
   .split-layout {
     flex-direction: column;
