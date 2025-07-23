@@ -124,26 +124,8 @@
           <ul id="trip-log"></ul>
         </section>
 
-        <!-- 💬 Filters -->
-        <section>
-          <div class="field-group">
-            <label for="filter-start">Start Date:</label>
-            <input type="date" id="filter-start" />
-          </div>
-          <div class="field-group">
-            <label for="filter-end">End Date:</label>
-            <input type="date" id="filter-end" />
-          </div>
-          <div class="field-group">
-            <label for="filter-purpose">Purpose:</label>
-            <input type="text" id="filter-purpose" placeholder="e.g. Client visit" />
-          </div>
-          <button onclick="applyFilters()">Apply Filters</button>
-          <button onclick="resetFilters()">Reset Filters</button>
-        </section>
-
-        <!-- 🔧 Help & Logout -->
-        <section>
+      <!-- 🔧 Help & Logout -->
+       <section>
           <button id="toggleHelpBtn">Help</button>
           <button id="clearHistoryBtn">Clear History</button>
           <button id="logoutBtn">Logout</button>
@@ -161,16 +143,7 @@
           <div id="directions-panel" class="collapsed"></div>
         </section>
 
-        <div id="help-screen" class="hidden">
-          <h3>📘 Help Guide</h3>
-          <p>1. Fill in purpose & notes.</p>
-          <p>2. Tap “Start Trip” to begin.</p>
-          <p>3. Pause/resume as needed.</p>
-          <p>4. Tap “End Trip” to finalize and view recap.</p>
-          <p>5. Export CSV or clear history.</p>
-        </div>
-
-        <div id="toast"></div>
+      <div id="toast"></div>
       </main>
     </div>
   </div>
