@@ -16,6 +16,26 @@ let totalPauseDuration = 0;
 
 window.tripStatus = 'idle';
 
+// === Input watcher: destination selection ===
+export function watchDestinationSelection() {
+  const autocompleteElement = document.getElementById("destination-autocomplete");
+  if (!autocompleteElement) return;
+
+  autocompleteElement.addEventListener("placechange", () => {
+    const place = autocompleteElement.getPlace();
+    if (!place || !place.geometry || !place.geometry.location) return;
+
+    const { lat, lng } = place.geometry.location;
+    const map = getMapInstance();
+    if (map) map.panTo({ lat: lat(), lng: lng() });
+
+    window.selectedDestination = place.geometry.location;
+    window.destinationName = place.name || place.formatted_address || "Destination";
+
+    showToast(`📍 Destination set: ${window.destinationName}`);
+  });
+}
+
 window.MileApp = {
   updateStatusBar(status) {
     document.getElementById("status-text").textContent = status;
