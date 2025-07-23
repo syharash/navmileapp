@@ -18,7 +18,9 @@ window.onload = function () {
   }
 
   // 🌐 Core setup
-  initDestinationInput();
+  window.onload = () => {
+    initDestinationInput();
+  };
   initVoiceToggle();
   initDirectionsPanelToggle();
   monitorDestinationProximity();
