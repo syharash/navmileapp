@@ -174,4 +174,9 @@
   padding: 24px;
 }
 
-
+/* 🚗 Vehicle Marker Styling */
+.gm-advanced-marker img {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+}
