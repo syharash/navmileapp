@@ -1,25 +1,25 @@
 {
-  "name": "Miles Recompense",
-  "short_name": "MileApp",
+  "name": "Miles Reimbursement",
+  "short_name": "NavMileApp",
   "description": "Track mileage, log trips, calculate reimbursements, and export your driving data.",
   "start_url": "https://syharash.github.io/navmileapp/index.html",
   "scope": "https://syharash.github.io/navmileapp/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#f4f4f4",
+  "background_color": "#f9f9f9",
   "theme_color": "#1976d2",
   "lang": "en-US",
   "id": "https://syharash.github.io/navmileapp/",
   "icons": [
    {
-      "src": "bluecar-512x512.png",
+      "src": "Copilot.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "car-192x192.png",
-      "sizes": "192x192",
+      "src": "bluecar-512x512.png",
+      "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
