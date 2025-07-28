@@ -63,17 +63,20 @@ export function initVehicleTracking(directions) {
     err => console.error("🛑 Tracking error:", err),
     { enableHighAccuracy: true, maximumAge: 1000 }
   );
+  // 🔊 Warm-up speech engine to avoid cold start delay
+setTimeout(() => speakText("Navigation initiated."), 1000);
 }
 
 // 🗣️ Check proximity and trigger voice navigation
 function speakUpcomingInstruction(current, steps) {
+  console.log("🔊 Voice guidance enabled?", window.voiceGuidanceEnabled);
   if (!window.voiceGuidanceEnabled) return;
 
   steps.forEach((step, index) => {
     const startLoc = step.start_location;
     const dist = google.maps.geometry.spherical.computeDistanceBetween(current, startLoc);
 
-    if (dist < 50 && !spokenSteps.has(index)) {
+    if (dist < 80 && !spokenSteps.has(index)) {
       spokenSteps.add(index);
       const instruction = stripHTML(step.instructions || "Continue");
       updateNavBanner(instruction);
@@ -85,7 +88,13 @@ function speakUpcomingInstruction(current, steps) {
 // 🪧 Show current step in UI banner
 function updateNavBanner(instruction) {
   const el = document.getElementById("nav-banner");
-  if (el) el.textContent = `Next: ${instruction}`;
+ function updateNavBanner(instruction) {
+  const el = document.getElementById("nav-banner");
+  if (el) {
+    const debugMsg = `Next: ${instruction}`;
+    const distText = `Distance trigger: < 80m`;
+    el.textContent = `${debugMsg} • ${distText}`;
+  }
 }
 
 // 🔊 Text-to-speech with interrupt control
@@ -124,3 +133,14 @@ function stripHTML(html) {
   temp.innerHTML = html;
   return temp.textContent || temp.innerText || "";
 }
+
+  export function testSpeakStep(index = 0) {
+  const map = getMapInstance();
+  const step = window?.routeSteps?.[index];
+  if (step) {
+    const instruction = stripHTML(step.instructions || "Continue");
+    speakText(`Test step ${index}: ${instruction}`);
+  } else {
+    console.warn("🛑 No step found at index", index);
+  }
+}  
